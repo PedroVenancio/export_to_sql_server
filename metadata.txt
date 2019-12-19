@@ -1,0 +1,25 @@
+[general]
+name=Export to SQL Server
+description=Exports a vector layer to a new SQL Server database connection. 
+about=It needs a Microsoft SQL Server driver installed: https://docs.microsoft.com/en-us/sql/connect/odbc/microsoft-odbc-driver-for-sql-server. 
+
+  This driver doesn’t support creating new databases, you might want to use the Microsoft SQL Server Client Tools for this purpose, but it does allow creation of new layers within an existing database.
+
+  More information about the tool: https://gdal.org/drivers/vector/mssqlspatial.html.
+
+  Developed by Pedro Venancio. Based in PostGIS Geoprocessing Tools plugin developed by Alexander Bruy and Giovanni Manghi for NaturalGIS (http://www.naturalgis.pt/) and in Export to PostgreSQL tool developed by Victor Olaya.
+
+category=Plugins
+version=0.1
+qgisMinimumVersion=3.4
+icon=icons/mIconMssql_32.png
+tags=vector, sqlserver
+author=Pedro Venancio
+email=pedrongvenancio@gmail.com
+homepage=https://github.com/PedroVenancio/export_to_sql_server
+tracker=https://github.com/PedroVenancio/export_to_sql_server/issues
+repository=https://github.com/PedroVenancio/export_to_sql_server
+experimental=False
+deprecated=False
+changelog=0.1
+    - First commit
