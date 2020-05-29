@@ -10,7 +10,7 @@ about=It needs a Microsoft SQL Server driver installed: https://docs.microsoft.c
   Developed by Pedro Venancio. Based in PostGIS Geoprocessing Tools plugin developed by Alexander Bruy and Giovanni Manghi for NaturalGIS (http://www.naturalgis.pt/) and in Export to PostgreSQL tool developed by Victor Olaya.
 
 category=Plugins
-version=0.1
+version=0.2
 qgisMinimumVersion=3.4
 icon=icons/mIconMssql_32.png
 tags=vector, sqlserver
@@ -21,5 +21,6 @@ tracker=https://github.com/PedroVenancio/export_to_sql_server/issues
 repository=https://github.com/PedroVenancio/export_to_sql_server
 experimental=False
 deprecated=False
-changelog=0.1
-    - First commit
+changelog=
+    0.2 - Fix a conflict with another plugin
+    0.1 - First commit
