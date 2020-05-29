@@ -35,7 +35,7 @@ from processing.tools import system
 
 from export_to_sql_server.OgrToSQLServer import OgrToSQLServer
 
-OGR_GEOPROCESSING_ACTIVE = 'OGR_GEOPROCESSING_ACTIVE'
+OGRTOSQLSERVER_ACTIVE = 'OGRTOSQLSERVER_ACTIVE'
 
 pluginPath = os.path.dirname(__file__)
 
@@ -58,7 +58,7 @@ class OgrGeoprocessingProvider(QgsProcessingProvider):
     def load(self):
         ProcessingConfig.settingIcons[self.name()] = self.icon()
         ProcessingConfig.addSetting(Setting(self.name(),
-                                            OGR_GEOPROCESSING_ACTIVE,
+                                            OGRTOSQLSERVER_ACTIVE,
                                             'Activate',
                                             True))
         ProcessingConfig.readSettings()
@@ -66,13 +66,13 @@ class OgrGeoprocessingProvider(QgsProcessingProvider):
         return True
 
     def unload(self):
-        ProcessingConfig.removeSetting(OGR_GEOPROCESSING_ACTIVE)
+        ProcessingConfig.removeSetting(OGRTOSQLSERVER_ACTIVE)
 
     def isActive(self):
-        return ProcessingConfig.getSetting(OGR_GEOPROCESSING_ACTIVE)
+        return ProcessingConfig.getSetting(OGRTOSQLSERVER_ACTIVE)
 
     def setActive(self, active):
-        ProcessingConfig.setSettingValue(OGR_GEOPROCESSING_ACTIVE, active)
+        ProcessingConfig.setSettingValue(OGRTOSQLSERVER_ACTIVE, active)
 
     def supportsNonFileBasedOutput(self):
         return True
