@@ -10,7 +10,7 @@ about=It needs a Microsoft SQL Server driver installed: https://docs.microsoft.c
   Developed by Pedro Venancio. Based in PostGIS Geoprocessing Tools plugin developed by Alexander Bruy and Giovanni Manghi for NaturalGIS (http://www.naturalgis.pt/) and in Export to PostgreSQL tool developed by Victor Olaya.
 
 category=Plugins
-version=0.2
+version=0.3
 qgisMinimumVersion=3.4
 icon=icons/mIconMssql_32.png
 tags=vector, sqlserver
@@ -22,5 +22,6 @@ repository=https://github.com/PedroVenancio/export_to_sql_server
 experimental=False
 deprecated=False
 changelog=
+    0.3 - Adds the option to register (or not) the new table in the geometry_columns metadata table - MSSQLSPATIAL_USE_GEOMETRY_COLUMNS
     0.2 - Fix a conflict with another plugin
     0.1 - First commit
