@@ -80,6 +80,7 @@ class OgrToSQLServer(GdalAlgorithm):
     PRECISION = 'PRECISION'
     PROMOTETOMULTI = 'PROMOTETOMULTI'
     MSSQLSPATIAL_USE_GEOMETRY_COLUMNS = 'MSSQLSPATIAL_USE_GEOMETRY_COLUMNS'
+    MSSQLSPATIAL_USE_BCP = 'MSSQLSPATIAL_USE_BCP'
     OPTIONS = 'OPTIONS'
 
     def __init__(self):
@@ -182,6 +183,9 @@ class OgrToSQLServer(GdalAlgorithm):
         self.addParameter(QgsProcessingParameterBoolean(self.MSSQLSPATIAL_USE_GEOMETRY_COLUMNS,
                                                         self.tr('Register in the geometry_columns metadata table'),
                                                         defaultValue=True))
+        self.addParameter(QgsProcessingParameterBoolean(self.MSSQLSPATIAL_USE_BCP,
+                                                        self.tr('Enable bulk insert when adding features'),
+                                                        defaultValue=False))
         self.addParameter(QgsProcessingParameterString(self.OPTIONS,
                                                        self.tr('Additional creation options'), defaultValue='',
                                                        optional=True))
@@ -263,6 +267,7 @@ class OgrToSQLServer(GdalAlgorithm):
         promotetomulti = self.parameterAsBool(parameters, self.PROMOTETOMULTI, context)
         precision = self.parameterAsBool(parameters, self.PRECISION, context)
         mssqlspatial_use_geometry_columns = self.parameterAsBool(parameters, self.MSSQLSPATIAL_USE_GEOMETRY_COLUMNS, context)
+        mssqlspatial_use_bcp = self.parameterAsBool(parameters, self.MSSQLSPATIAL_USE_BCP, context)
         options = self.parameterAsString(parameters, self.OPTIONS, context)
 
         arguments = []
@@ -340,6 +345,8 @@ class OgrToSQLServer(GdalAlgorithm):
             arguments.append('-lco PRECISION=NO')
         if mssqlspatial_use_geometry_columns is False:
             arguments.append('--config MSSQLSPATIAL_USE_GEOMETRY_COLUMNS NO')
+        if mssqlspatial_use_bcp is False:
+            arguments.append('--config MSSQLSPATIAL_USE_BCP NO')
         if len(options) > 0:
             arguments.append(options)
 
