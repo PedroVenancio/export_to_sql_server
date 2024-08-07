@@ -230,8 +230,8 @@ class OgrToSQLServer(GdalAlgorithm):
         return SQLServerUtils.escapeAndJoinSQLServer(arguments)
 
     def getConsoleCommands(self, parameters, context, feedback, executing=True):
-        ogrLayer, layername = self.getOgrCompatibleSource(self.INPUT, parameters, context, feedback, executing)
-        if not layername:
+        input_details = self.getOgrCompatibleSource(self.INPUT, parameters, context, feedback, executing)
+        if not input_details.layer_name:
             raise QgsProcessingException(self.invalidSourceError(parameters, self.INPUT))
 
         shapeEncoding = self.parameterAsString(parameters, self.SHAPE_ENCODING, context)
@@ -280,8 +280,8 @@ class OgrToSQLServer(GdalAlgorithm):
         arguments.append('MSSQLSpatial')
         arguments.append('MSSQL:' + self.getConnectionString(parameters, context))
         arguments.append(dimstring)
-        arguments.append(ogrLayer)
-        arguments.append(layername)
+        arguments.append(input_details.connection_string)
+        arguments.append(input_details.layer_name)
         if index:
             arguments.append(indexstring)
         if launder:
@@ -304,7 +304,7 @@ class OgrToSQLServer(GdalAlgorithm):
         elif primary_key:
             arguments.append("-lco FID=" + primary_key)
         if len(table) == 0:
-            table = layername.lower()
+            table = input_details.layer_name.lower()
         if schema:
             table = '{}.{}'.format(schema, table)
         arguments.append('-nln')
@@ -343,6 +343,8 @@ class OgrToSQLServer(GdalAlgorithm):
             arguments.append('-nlt PROMOTE_TO_MULTI')
         if precision is False:
             arguments.append('-lco PRECISION=NO')
+        if input_details.open_options:
+            arguments.extend(input_details.open_options_as_arguments())
         if mssqlspatial_use_geometry_columns is False:
             arguments.append('--config MSSQLSPATIAL_USE_GEOMETRY_COLUMNS NO')
         if mssqlspatial_use_bcp is False:
